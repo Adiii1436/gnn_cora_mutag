@@ -1,0 +1,1 @@
+{'Best_hyperparameters': {'learning_rate': 0.00401, 'gnn_layer_type': 'GCN', 'n_neurons': 208, 'n_gnn_layers': 2, 'n_linear_layers': 1}, 'Best_value': 0.87, 'study_name': 'cora_study_04_Apr_2024_01_52_02', 'log_dir': 'logs/cora04_Apr_2024_01_52_02/'}

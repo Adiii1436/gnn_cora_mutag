@@ -160,8 +160,8 @@ def define_objective(project, dataset, loss_fn, train_fn, hypermodel_fn, epochs,
 
         config = dict(hyperparameters,
                       **{'epochs': epochs, 'learning_rate': learning_rate, 'batch_size': batch_size, 'seed': seed})
-        wandb.init(project=project, entity="nickkaparinos", name=name, config=config, notes=notes, group='',
-                   reinit=True)
+        # wandb.init(project=project, entity="nickkaparinos", name=name, config=config, notes=notes, group='',
+        #            reinit=True)
 
         for epoch in tqdm(range(1, epochs + 1)):
             validation_accuracy = train_fn(dataset, batch_size, model, loss_fn, optimizer, epoch, device)
@@ -173,7 +173,7 @@ def define_objective(project, dataset, loss_fn, train_fn, hypermodel_fn, epochs,
             #     raise optuna.TrialPruned()
 
         max_validation_accuracy = max(epoch_validation_accuracies)
-        wandb.log({'Max_validation_accuracy': max_validation_accuracy})
+        # wandb.log({'Max_validation_accuracy': max_validation_accuracy})
         return max_validation_accuracy
 
     return objective
@@ -217,9 +217,9 @@ def cora_train_fn(dataset, batch_size, model, loss_fn, optimizer, epoch, device)
         validation_f1 = f1_score(validation_labels, validation_predictions, average='micro')
 
         # Wandb logging
-        wandb.log(data={'Epoch': epoch, 'Training_loss': loss.item(), 'Training_accuracy': train_accuracy,
-                        'Training_f1': train_f1, 'Validation_accuracy': validation_accuracy,
-                        'Validation_f1': validation_f1})
+        # wandb.log(data={'Epoch': epoch, 'Training_loss': loss.item(), 'Training_accuracy': train_accuracy,
+        #                 'Training_f1': train_f1, 'Validation_accuracy': validation_accuracy,
+        #                 'Validation_f1': validation_f1})
     return validation_accuracy
 
 
@@ -255,7 +255,7 @@ def graph_clasif_train_fn(dataset, batch_size, model, loss_fn, optimizer, epoch,
         loss = loss_fn(output, y_train_temp)
         loss.backward()
         optimizer.step()
-        wandb.log(data={'Training_loss': loss.item()})
+        # wandb.log(data={'Training_loss': loss.item()})
 
         # Stack
         y_train = np.hstack([y_train, y_train_temp.numpy()]) if y_train.size else y_train_temp.numpy()
@@ -273,7 +273,7 @@ def graph_clasif_train_fn(dataset, batch_size, model, loss_fn, optimizer, epoch,
 
             #  Loss
             val_loss = loss_fn(output, y_val_temp)
-            wandb.log(data={'Validation_loss': val_loss.item()})
+            # wandb.log(data={'Validation_loss': val_loss.item()})
 
             # Stack
             y_val = np.hstack([y_val, y_val_temp.numpy()]) if y_val.size else y_val_temp.numpy()
@@ -286,8 +286,8 @@ def graph_clasif_train_fn(dataset, batch_size, model, loss_fn, optimizer, epoch,
     validation_f1 = f1_score(y_val, v_val_pred, average='micro')
 
     # Wandb logging
-    wandb.log(data={'Epoch': epoch, 'Training_accuracy': train_accuracy, 'Training_f1': train_f1,
-                    'Validation_accuracy': validation_accuracy, 'Validation_f1': validation_f1})
+    # wandb.log(data={'Epoch': epoch, 'Training_accuracy': train_accuracy, 'Training_f1': train_f1,
+                    # 'Validation_accuracy': validation_accuracy, 'Validation_f1': validation_f1})
     return validation_accuracy
 
 

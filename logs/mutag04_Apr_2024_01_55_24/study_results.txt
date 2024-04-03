@@ -1,0 +1,1 @@
+{'Best_hyperparameters': {'learning_rate': 0.08001, 'gnn_layer_type': 'GCN', 'n_neurons': 32, 'n_gnn_layers': 2, 'n_linear_layers': 3}, 'Best_value': 0.8424242424242424, 'study_name': 'mutag_study_04_Apr_2024_01_55_24', 'log_dir': 'logs/mutag04_Apr_2024_01_55_24/'}
